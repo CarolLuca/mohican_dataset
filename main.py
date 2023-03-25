@@ -28,6 +28,7 @@ def clean_motto(motto):
 def clean_csv(input_file, output_file):
     inf = open(input_file, "r", errors = "ignore")
     outf = open(output_file, "w")
+    outf.write("name,motto\n")
 
     lines = inf.readlines()
     for line in lines:
@@ -49,16 +50,18 @@ def clean_csv(input_file, output_file):
 def create_dataset(input_file, output_file):
     inf = open(input_file, "r", errors = "ignore")
     outf = open(output_file, "w")
+    outf.write("name,logo,ad,motto\n")
 
     lines = inf.readlines()
     for line in lines:
-        company = line.split(",")[0]
-        motto = line.split(",")[1]
+        if line.startswith("name,motto") == False:
+            company = line.split(",")[0]
+            motto = line.split(",")[1]
 
-        logo = get_google_img(company + " logo")
-        ad = get_google_img(company + " \"ads\"")
+            logo = get_google_img(company + " logo")
+            ad = get_google_img(company + " \"ads\"")
 
-        outf.write(company + "," + logo + "," + ad + "," + motto)
+            outf.write(company + "," + logo + "," + ad + "," + motto)
 
     inf.close()
     outf.close()
