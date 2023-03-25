@@ -4,15 +4,25 @@ def clean_company(company):
     cleaned_company = company.strip(" ")
     return cleaned_company
 
+def eliminate_punctuation(string):
+    cleaned_string = ""
+
+    for character in string:
+        if character.lower() in " qwertyuiopasdfghjklzxcvbnm\n":
+            cleaned_string += character
+
+    return cleaned_string
+
 def clean_motto(motto):
     pc_motto = motto.strip(" ")
-
     cleaned_motto = ""
+
     for word in pc_motto.split(" "):
-        if word.startswith("(") == False and word.endswith(")") == False:
+        if word.startswith("(") == False and word.startswith(")") == False:
             cleaned_motto += word + " "
 
-    cleaned_motto = cleaned_motto[:len(cleaned_motto)-1]
+    cleaned_motto = cleaned_motto.strip(" ")
+    cleaned_motto = eliminate_punctuation(cleaned_motto)
     return cleaned_motto
 
 def clean_csv(input_file, output_file):
@@ -27,7 +37,11 @@ def clean_csv(input_file, output_file):
         company = clean_company(company)
         motto = clean_motto(motto)
 
-        outf.write(company + "," + motto)
+        if motto.endswith("\n"):
+            outf.write(company + "," + motto)
+        else:
+            outf.write(company + "," + motto + "\n")
+
 
     inf.close()
     outf.close()
@@ -42,7 +56,7 @@ def create_dataset(input_file, output_file):
         motto = line.split(",")[1]
 
         logo = get_google_img(company + " logo")
-        ad = get_google_img(company + " \"ad\"")
+        ad = get_google_img(company + " \"ads\"")
 
         outf.write(company + "," + logo + "," + ad + "," + motto)
 

@@ -10,14 +10,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\name_logo_ad_motto.csv">
+        <entry key="\dirty_name_motto.csv">
           <value>
             <Attribute>
-              <option name="separator" value=":" />
+              <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\name_motto.csv">
+        <entry key="\name_logo_ad_motto.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
